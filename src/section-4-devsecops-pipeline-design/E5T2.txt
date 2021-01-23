@@ -1,0 +1,28 @@
+# Identify tools that will allow you to do the following:
+
+## Scan infrastructure as code templates
+
+ - Regula - scans Terraform templates
+ - Cloudsploit - scans CloudFormation templates
+
+### Example vulnerability
+
+ - May identify an overly permissive resource policy, e.g. wildcard resource vs specific bucket name for S3
+
+## Scan AMI’s or containers for OS vulnerabilities
+
+ - Clair - parses container image contents and reports on vulnerabilities affecting those contents, based on CVE database
+
+### Example vulnerability
+
+- May identify exploits affecting libaries or sofware baked into the container image e.g. an exploit affecting particular versions of CentOS or Alpine Linux
+
+## Scan an AWS environment for cloud configuration vulnerabilities
+
+- AWS Config
+- AWS Inspector
+
+### Example vulnerability
+
+- Unencrypted volumes/buckets, misconfigured ALB HTTPS redirection etc.
+- Root access to EC2 instances

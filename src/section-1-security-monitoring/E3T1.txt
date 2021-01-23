@@ -1,0 +1,19 @@
+# Describe GuardDuty findings that were detected related to the brute force attack
+
+- No findings visible in GuardDuty
+- Despite running the attack simulation for over an hour each time, on serveral attempts, no findings appeared in GuardDuty.
+- After waiting 24hrs to see if findings appeared, I tried disabling/reenabling GuardDuty and re-running the simulation again - still no findings
+- EC2 monitoring and VPC Flow Logs appeared to show the attack
+- GuardDuty itself appeared to be working to some extent as it picked up console logins with my root account
+
+# Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
+
+- GuardDuty documentation lists the following data sources
+  - CloudTrail Event Logs 
+  - CloudTrail Management Events
+  - CloudTrail S3 Data Events
+  - VPC Flow Logs
+  - DNS Logs
+
+Of these data sources, VPC Flow Logs would be the source that would enable GuardDuty to detect
+a brute force attack as the Flow Logs record IP traffic to/from EC2 network interfaces within a given VPC

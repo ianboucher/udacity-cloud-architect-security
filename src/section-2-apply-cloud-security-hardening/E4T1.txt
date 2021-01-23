@@ -1,0 +1,11 @@
+# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+
+- Prevent all SSH access/ability to login to web-app instances i.e. make EC2 instances immutable
+- Tighten security groups to prevent access from the internet
+- Move web-app instances into private subnet
+
+# Neither instance should have had access to the secret recipes bucket, in the event that instance API credentials were compromised how could we have prevented access to sensitive data.
+
+- Allow only role-based access to S3 buckets and require instances to assume the correct role, ensuring that the secret bucket required a different role from the free recipes
+- Enable SSE on the buckets
+- Encrypt data via client-side encryption before writing to the bucket

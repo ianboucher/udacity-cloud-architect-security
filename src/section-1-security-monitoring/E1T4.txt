@@ -1,0 +1,18 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+# Poor practice 1
+
+Web application servers are deployed in a public subnet, within an overly permissive security group.
+They are therefore open to the public internet, placing them at greater risk of attack.
+
+# Poor practice 2
+
+S3 buckets are deployed with public access and without server-side encryption.
+This enables them to be accessed from the public internet and the contents can be read in plain text.
+
+# Other poor practices
+
+- Keypair/SSH used for webserver EC2 access, rather than specific roles or treating them as immuatable.
+- S3 policy docs too permissive, containing wildcards for resources, enabling web servers to access any bucket.
+- Web security group too open, allowing all traffic from any port for different methods of connection.
+- ALB does not accept/redirect to HTTPS 

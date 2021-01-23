@@ -1,0 +1,31 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+1. App EC2 instance is reachable from the internet through its Security Group and IGW (Inspector)
+2. App EC2 instance is configured to allow users to log in with root credentials over SSH, without having to use a command authenticated by a public key. This increases the likelihood of a successful brute-force attack.
+3. App EC2 instance, TCP port 22, which is associated with SSH, is reachable from the internet with a process listening on the port.
+4. App EC2 instance is configured to support password authentication over SSH. Password authentication is susceptible to brute-force attacks and should be disabled in favor of key-based authentication where possible.
+5. App EC2 instance, process 'python3' is listening on TCP port 5000 which is reachable from the internet
+6. App EC2 instance, port 22 is reachable from the internet
+7. App EC2 instance, port 3389 is reachable from the internet
+8. VPC default SG is open
+9. Logging not enabled on S3 buckets so we have no visibility of who's made changes/accessed objects
+10. EC2 EBS volumes are not encrypted
+11. ALB redirect HTTP to HTTPS not enabled
+12. S3 SSE not enabled
+
+Bonus - provide recommendations on how to remediate the vulnerabilities.
+
+(recommendations map to numbered vulnerabilities above)
+
+1. Edit the Web-App Security Group to remove access from the internet
+2. Configure App EC2 instance to prevent root account logins over SSH to reduce the likelihood of successful brute-force attacks
+3. Edit the Web-App Security Group to remove access from the internet
+4. Disable password authentication over SSH on EC2 instances and enable support for key-based authentication instead.
+5. Edit the Web-App Security Group to remove access from the internet
+6. Ensure no security groups allow ingress from 0.0.0.0/0 to port 22
+7. Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389
+8. Ensure the default security group of every VPC restricts all traffic by default
+9. Enable access logging on S3 buckets
+10. Enable encryption on EBS volumes & ensure encryption by default
+11. Enable HTTP to HTTPS redirection on ALB
+12. Enable SSE on S3 buckets
