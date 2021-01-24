@@ -1,6 +1,11 @@
 # Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
 
-- Prevent all SSH access/ability to login to web-app instances i.e. make EC2 instances immutable
+Authentication:
+- The recommended "gold standard" is to make EC2 instances immutable - i.e. remove ALL ability to login the instances, thus removing the ability to obtain access by brute-force.
+- A second option is to only allow authentication via a configuration management tool, such as AWS Systems manager, along with an instance profile role that allows the instance to work with SSM
+- In conjunction with access via Systems Manager, role based access should be utilised - employing a role which only provides users with that role permission to login to only the specific instance in question.
+
+Ingress Control:
 - Tighten security groups to prevent access from the internet
 - Move web-app instances into private subnet
 

@@ -2,5 +2,5 @@
 # What additional hardening could be added?
 
 - S3 bucket versioning - to mitigate ransom attacks or destructive actions
-- Client-side encryption
-- S3 bucket policy - make private & allow access only from specific VPC or VPC endpoints
+- Client-side encryption of data before writing to S3
+- S3 bucket policy - make private & allow access only from specific VPC or VPC endpoints / and or specific roles
