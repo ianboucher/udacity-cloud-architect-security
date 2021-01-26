@@ -36,7 +36,7 @@ The architecture of the environment, prior to hardening, is described by the dia
 - The scripts will attempt to break into the web application instance using the public IP and attempt to access data in the secret recipe S3 bucket.
  
 ### Getting Started
-Full instructions can be found [here](INSTRUCTIONS.md), but to get up and running quickly, run the following commands to deploy each of the three initial CloudFormation stacks, via the AWS CLI. 
+Full instructions can be found [here](./instructions/INSTRUCTIONS.md), but to get up and running quickly, run the following commands to deploy each of the three initial CloudFormation stacks, via the AWS CLI. 
  
 ##### Deploy the S3 buckets
 ```
