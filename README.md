@@ -18,7 +18,6 @@ Refer to the below links to get the AWS CLI installed and configured in your loc
  
 [Configuring the CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
  
-
 ## Initial Environment - Prior to Hardening
   
 The architecture of the environment, prior to hardening, is described by the diagam below. It includes a number of poor security practices, which were to be exploited via an attack simulation, before incrementally hardening the infrastructure.
@@ -35,13 +34,9 @@ The architecture of the environment, prior to hardening, is described by the dia
 #### Attack flow:
 - Scripts simulating an attack will be run from a separate instance which is in an un-trusted subnet.
 - The scripts will attempt to break into the web application instance using the public IP and attempt to access data in the secret recipe S3 bucket.
-
  
 ### Getting Started
-Full instructions can be found [here](INSTRUCTIONS.md), but to get up and running quickly, run the following commands to deploy each of the three initial CloudFormation stacks, via the AWS CLI.
- 
- 
-#### From the root directory of the repository - execute the below commands to deploy the templates.
+Full instructions can be found [here](INSTRUCTIONS.md), but to get up and running quickly, run the following commands to deploy each of the three initial CloudFormation stacks, via the AWS CLI. 
  
 ##### Deploy the S3 buckets
 ```
@@ -103,72 +98,21 @@ You should receive a recipe for banana bread.
 
 The AMIs specified in the cloud formation template exist in the us-east-1 (N. Virginia) region. You will need to set this as your default region when deploying resources for this project.
  
-###  Identification of Bad Practices
  
-Based on the architecture diagram, and the steps taken to upload data and access the application web service, an initial observation of poor security practices were listed in the text file named E1T4.txt.
+### Security Monitoring & Hardening using AWS Native Tools
  
-**Deliverables:** 
-- **E1T4.txt** - Text file identifying 2 poor security practices with justification. 
- 
-## Part 2: Enable Security Monitoring
- 
- 
-### Security Monitoring using AWS Native Tools
- 
-Security monitoring was set-up to ensure that the AWS account and environment configuration is in compliance with the CIS standards for cloud security. The following AWS services were used:
+Some of the AWS tools and services used to provide analysis, visibility and remediation of the security posture of the application were as follows:
 
 - AWS Config
 - AWS Inspector
 - AWS GuardDuty
 - AWS SecurityHub
- 
-### Identify and Triage Vulnerabilities
+- AWS KMS
+- AWS WAF
+- AWS IAM
+- AWS CloudFormation
+- AWS VPC
+- AWS SecurityGroups
   
-Vulnerabilities related to the code that was deployed for the environment in this project were identified, along with recommendations on how to remediate them E2T2.txt
- 
-**Deliverables:** 
-- **E2T2_config.png** - Screenshot of AWS Config showing non-compliant rules.
-- **E2T2_inspector.png** - Screenshot of AWS Inspector showing scan results.
-- **E2T2.png_securityhub.png** - Screenshot of AWS Security Hub showing compliance standards for CIS foundations.
-- **E2T2.txt** - Identified vulerabilities and potential steps to remediate them.
- 
-## Part 3 - Attack Simulation
- 
-The following scripts were exectured in order to simulate the following attack conditions:
-- Making an SSH connection to the application server using brute force password cracking.
-- Capturing "secret" files from the s3 bucket using stolen API keys.
- 
-### Brute force attack to exploit SSH ports facing the internet and an insecure configuration on the server
-
-The attack simulation was carried out from the EC2 "Attack Instance" by logging in ot the instance via SSH key pair as follows:
-
-```
-ssh -i <private key file> ubuntu@<AttackInstanceIP>
-```
- 
-
-The following commands were then executed in order to start a brute force attack against the application server, using a tool called Hydra - already installed on the Attack Instance image. (The application server hostname is required for this).
-```
-date
-hydra -l ubuntu -P rockyou.txt ssh://<ApplicationServerDnsNameHere>
-```
- 
-Wait 10 - 15 minutes and check AWS Guard Duty.
- 
-#### 3. Answer the following questions:
-1. What findings were detected related to the brute force attack?
-2. Take a screenshot of the Guard Duty findings specific to the attack. Title this screenshot E3T1_guardduty.png.
-3. Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information?
- 
-Submit text answers in E3T1.txt.
- 
-**Deliverables:**
-- **E3T1_guardduty.png** - Screenshot of Guard Duty findings specific to the Exercise 3, Task 1 attack.
-- **E3T1.txt** - Answer to the questions at the end of Exercise 3, Task 1.
- 
-### Task 2: Accessing Secret Recipe Data File from S3
- 
-Imagine a scenario where API keys used by the application server to read data from S3 were discovered and stolen by the brute force attack.  This provides the attack instance the same API privileges as the application instance.  We can test this scenario by attempting to use the API to read data from the secrets S3 bucket.
- 
 
 
