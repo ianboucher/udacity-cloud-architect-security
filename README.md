@@ -22,7 +22,7 @@ Refer to the below links to get the AWS CLI installed and configured in your loc
   
 The architecture of the environment, prior to hardening, is described by the diagam below. It includes a number of poor security practices, which were to be exploited via an attack simulation, before incrementally hardening the infrastructure.
  
-![base environment](AWS-WebServiceDiagram-v1-insecure.png)
+![base environment](./instructions/AWS-WebServiceDiagram-v1-insecure.png)
  
 #### Expected user flow:
 - Clients will invoke a public-facing web service to pull free recipes.  
